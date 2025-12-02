@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ESP8266 Capteurs</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #2c3e50; }
+    pre { background: #f0f0f0; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Données des capteurs</h1>
+  <button onclick="chargerDonnees()">Charger les données</button>
+  <pre id="donnees">Clique sur le bouton pour récupérer les données.</pre>
+
+  <script>
+    function chargerDonnees() {
+      fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('donnees').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          document.getElementById('donnees').textContent = "Erreur: " + err;
+        });
+    }
+  </script>
+</body>
+</html>
